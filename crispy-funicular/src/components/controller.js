@@ -4,14 +4,13 @@ class Controller extends React.Component{
     constructor(props){
         super(props);
         this.sudokuRef=props.sudokuRef;
-        console.log(props);
-        console.log(props.ref)
-        console.log(props.sudokuRef.current)
         this.clicked = this.clicked.bind(this);
     }
     clicked(e){
-        console.log(e.target.id)
-        console.log(this.sudokuRef.current)
+        var key = e.target.id
+        var grid = this.sudokuRef.current;
+        grid.keyDown(key)
+        grid.draw();
     }
     render(){
         return(

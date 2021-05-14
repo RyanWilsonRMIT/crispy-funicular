@@ -8,14 +8,13 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.sudokuRef = React.createRef();
-    this.sudokuRef=this;
   }
   render(){
     return (
       <div className="App">
         <Header />
         <h1>Sudoku</h1>
-        <Sudoku />
+        <Sudoku sudokuRef={this.sudokuRef}/>
         <Controller sudokuRef={this.sudokuRef} />
         <Footer />
       </div>
