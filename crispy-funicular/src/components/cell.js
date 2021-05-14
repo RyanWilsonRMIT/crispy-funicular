@@ -52,7 +52,6 @@ class Cell{
 
     }
     select(){
-        console.log("Selecting " + this.x + " "+ this.y);
         this.highlighted=true;
     }
     unselect(){
