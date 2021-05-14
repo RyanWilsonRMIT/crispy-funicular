@@ -124,8 +124,13 @@ class Grid{
                 if (!this.selected.locked){
                     if (numbers.includes(key)){
                         if (this.checkIfValid(this.selected,key)){
-                            this.selected.setValue(key);
+                            if (this.selected.value!=""){
+                                this.keyDown("Backspace");
+                            }
+                            this.placeIfValid(this.selected,key);
                         }
+                        
+                        
                     }
                     else if(key=="Backspace"){
                         this.removeNumber(this.selected,this.selected.value);
@@ -150,9 +155,25 @@ class Grid{
         if (this.boxs[box][key]){
             return false;
         }
+        return true;
+    }
+    placeIfValid(cell, key){
+        var x = cell.x/cell.width
+        var y = cell.y/cell.height
+        var box = this.coordsToBox(x,y);
+        if (this.cols[x][key]){
+            return false;
+        }
+        if (this.rows[y][key]){
+            return false;
+        }
+        if (this.boxs[box][key]){
+            return false;
+        }
         this.cols[x][key]=true;
         this.rows[y][key]=true;
         this.boxs[box][key]=true;
+        cell.setValue(key);
         return true;
     }
     removeNumber(cell, key){
