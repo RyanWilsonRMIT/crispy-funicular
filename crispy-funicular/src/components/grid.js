@@ -29,6 +29,32 @@ class Grid{
     getCellHeight(){
         return this.height/9
     }
+    unHighlightRelated(){
+        for (var i=0; i<9; i++){
+            for (var j=0; j<9;j++){
+                this.cells[i][j].paleHighlight=false;
+                this.cells[i][j].highlighted=false;
+            }
+        }
+    }
+    highlightRelated(x,y){
+        this.unHighlightRelated();
+        if (this.cells[x][y].value!=""){
+            for (var i=0; i<9; i++){
+                for (var j=0; j<9;j++){
+                    if (this.cells[i][j].value==this.cells[x][y].value){
+                        this.cells[i][j].highlighted=true;
+                    }
+                }
+            }
+        }
+        for (var i=0; i<9; i++){
+            this.cells[x][i].paleHighlight=true;
+        }
+        for (var i=0; i<9; i++){
+            this.cells[i][y].paleHighlight=true;
+        }
+    }
     import(grid){
         this.cells = [];
         for (var x=0;x<9;x++){
@@ -36,8 +62,7 @@ class Grid{
             for (var y=0;y<9;y++){
                 var cell = new Cell(x * this.getCellWidth(),y * this.getCellHeight(),this.getCellWidth(),this.getCellHeight(),this.ctx)
                 if (grid[y][x]!=0){
-                    if (this.checkIfValid(cell,grid[y][x])){
-                        cell.value = grid[y][x];
+                    if (this.placeIfValid(cell,grid[y][x])){
                         cell.locked = true;
                     }
                     else{
@@ -113,6 +138,7 @@ class Grid{
         if (this.selected){
             this.selected.unselect();
         }
+        this.highlightRelated(x,y);
         this.cells[x][y].select();
         this.selected = this.cells[x][y];
     }
@@ -128,6 +154,9 @@ class Grid{
                                 this.keyDown("Backspace");
                             }
                             this.placeIfValid(this.selected,key);
+                            var cellx = this.selected.x/this.selected.width
+                            var celly = this.selected.y/this.selected.width;
+                            this.highlightRelated(cellx, celly)
                         }
                         
                         

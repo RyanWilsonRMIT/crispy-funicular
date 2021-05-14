@@ -3,6 +3,7 @@ const strokeColor = "#231F20";
 export {strokeColor};
 const fillColor = "#7EBDC2";
 const highlightColor = "#72B01D";
+const paleHighlight = "#94b06d"
 const lockColor = "#3F7D20"
 
 class Cell{
@@ -14,17 +15,21 @@ class Cell{
         this.width=width;
         this.height=height;
         this.highlighted=false;
+        this.paleHighlight=false;
         this.ctx=ctx;
     }
     draw(){
         this.ctx.beginPath()
         this.ctx.strokeStyle = strokeColor;
         this.ctx.rect(this.x,this.y,this.width,this.height);
-        if (this.highlighted == false){
-            this.ctx.fillStyle = fillColor;
+        if (this.highlighted){
+            this.ctx.fillStyle = highlightColor;
+        }
+        else if (this.paleHighlight){
+            this.ctx.fillStyle = paleHighlight;
         }
         else{
-            this.ctx.fillStyle = highlightColor;
+            this.ctx.fillStyle = fillColor;
         }
         this.ctx.fill();
         this.ctx.stroke();
