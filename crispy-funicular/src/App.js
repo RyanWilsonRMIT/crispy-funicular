@@ -2,15 +2,25 @@ import './App.css';
 import Header from './components/header.js'
 import Sudoku from './components/Sudoku.js'
 import Footer from './components/footer.js'
-function App() {
-  return (
-    <div className="App">
-      <Header />
-      <h1>Sudoku</h1>
-      <Sudoku />
-      <Footer />
-    </div>
-  );
+import Controller from './components/controller.js'
+import React from 'react'
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.sudokuRef = React.createRef();
+    this.sudokuRef=this;
+  }
+  render(){
+    return (
+      <div className="App">
+        <Header />
+        <h1>Sudoku</h1>
+        <Sudoku />
+        <Controller sudokuRef={this.sudokuRef} />
+        <Footer />
+      </div>
+    );
+  }
 }
 
 export default App;

@@ -2,6 +2,7 @@ import './Sudoku.css'
 import React, { useRef, useEffect } from 'react'
 import Grid from "./grid.js"
 const Sudoku = props =>{
+    
     const canvasRef = useRef(null)
     var grid;
     var canvas;

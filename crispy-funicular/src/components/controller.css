@@ -1,0 +1,15 @@
+.controller{
+
+}
+.controller Button{
+    background-color:green;
+    width:50px;
+    height:50px;
+    color:white;
+}
+.controller .number{
+    font-size:40px;
+}
+.controller .del{
+    font-size:20px;
+}
