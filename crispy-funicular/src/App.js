@@ -14,8 +14,11 @@ class App extends React.Component {
       <div className="App">
         <Header />
         <h1>Sudoku</h1>
-        <Sudoku sudokuRef={this.sudokuRef}/>
-        <Controller sudokuRef={this.sudokuRef} />
+        <div style={{verticalAlign: "middle"}}>
+          <Sudoku sudokuRef={this.sudokuRef}/>
+          <Controller sudokuRef={this.sudokuRef} />
+        </div>
+        
         <Footer />
       </div>
     );

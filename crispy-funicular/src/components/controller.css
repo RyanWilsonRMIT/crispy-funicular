@@ -1,15 +1,32 @@
 .controller{
-
+    display:inline-block;
+    margin: auto;
 }
 .controller Button{
     background-color:green;
-    width:50px;
-    height:50px;
+    width:150px;
+    height:150px;
     color:white;
+    border-radius:25px;
+    transition-duration: 1s;
+    margin: 5px;
+    cursor: pointer;
+    user-select:none;
+    
 }
+
+.controller Button:active{
+    background-color:rgb(0, 77, 0);
+    transition-duration: 0s;
+    width:160px;
+    height:160px;
+    margin:0px;
+
+}
+
 .controller .number{
-    font-size:40px;
+    font-size:80px;
 }
 .controller .del{
-    font-size:20px;
+    font-size:60px;
 }

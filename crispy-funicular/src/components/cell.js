@@ -17,6 +17,7 @@ class Cell{
         this.highlighted=false;
         this.paleHighlight=false;
         this.ctx=ctx;
+        this.pencils=[false,false,false,false,false,false,false,false,false]
     }
     draw(){
         this.ctx.beginPath()
@@ -44,8 +45,33 @@ class Cell{
             this.ctx.font = "100px Arial";
             var textx = this.x + 0.2 * this.width;
             var texty = this.y + this.height - 0.1 * this.width;
-            this.ctx.fillText(this.value, textx, texty);    
+            this.ctx.fillText(this.value, textx, texty);
         }
+        else{
+            this.ctx.fillStyle = strokeColor;
+            this.ctx.font = "20px Arial";
+            for (var i=0; i<9;i++){
+                if(this.pencils[i]){
+                    var textx = this.x + 0.2 * this.width;
+                    var texty = this.y + this.height - 0.1 * this.width;
+                    if (i<=2){
+                        texty-=(this.height*0.6);
+                    }
+                    else if (i<=5){
+                        texty-=(this.height*0.3);
+                    }
+                    if (i%3==2){
+                        textx+=(this.width*0.6);
+                    }
+                    else if (i%3==1){
+                        textx+=(this.width*0.3);
+                    }
+                    
+                    this.ctx.fillText(i+1, textx, texty);
+                }
+            }
+        }
+        
         
     }
     click(){
@@ -60,6 +86,14 @@ class Cell{
     keyDown(key){
         
         
+    }
+    pencil(key){
+        if (this.pencils[key-1]){
+            this.pencils[key-1]=false;
+        }
+        else{
+            this.pencils[key-1]=true;
+        }
     }
     setValue(key){
         this.value=key;

@@ -12,6 +12,7 @@ class Grid{
         this.rows = []
         this.cols = []
         this.boxs = []
+        this.pencil=false;
         for (var i=0; i<9;i++){
             this.rows[i]=[];
             this.boxs[i]=[];
@@ -145,19 +146,25 @@ class Grid{
     keyDown(key){
         if (this.selected){ //if selected exists
             var numbers=["1","2","3","4","5","6","7","8","9"]
-            var validOptions = numbers.concat(["Backspace"]);
+            var validOptions = numbers.concat(["Backspace"," "]);
             if (validOptions.includes(key)){
                 if (!this.selected.locked){
                     if (numbers.includes(key)){
-                        if (this.checkIfValid(this.selected,key)){
-                            if (this.selected.value!=""){
-                                this.keyDown("Backspace");
-                            }
-                            this.placeIfValid(this.selected,key);
-                            var cellx = this.selected.x/this.selected.width
-                            var celly = this.selected.y/this.selected.width;
-                            this.highlightRelated(cellx, celly)
+                        if (this.pencil){
+                            this.selected.pencil(key);
                         }
+                        else{
+                            if (this.checkIfValid(this.selected,key)){
+                                if (this.selected.value!=""){
+                                    this.keyDown("Backspace");
+                                }
+                                this.placeIfValid(this.selected,key);
+                                var cellx = this.selected.x/this.selected.width
+                                var celly = this.selected.y/this.selected.width;
+                                this.highlightRelated(cellx, celly)
+                            }
+                        }
+                        
                         
                         
                     }
@@ -165,8 +172,18 @@ class Grid{
                         this.removeNumber(this.selected,this.selected.value);
                         this.selected.setValue("");
                     }
+                    
                 }
                 
+            }
+        }
+        if (key==" "){
+            console.log("space pushed")
+            if (this.pencil){
+                this.pencil=false;
+            }
+            else{
+                this.pencil=true;
             }
         }
         
