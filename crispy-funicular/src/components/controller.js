@@ -5,8 +5,14 @@ class Controller extends React.Component{
         super(props);
         this.sudokuRef=props.sudokuRef;
         this.clicked = this.clicked.bind(this);
+        this.penbut = React.createRef();
+        props.contRef.current=this;
+    }
+    componentDidMount(){
+        
     }
     clicked(e){
+
         var key = e.target.id
         var grid = this.sudokuRef.current;
         grid.keyDown(key)
@@ -33,7 +39,7 @@ class Controller extends React.Component{
                             <td><button onClick = {this.clicked} className="number" id="9">9</button></td>
                         </tr>
                         <tr>
-                            <td></td>
+                            <td><button onClick = {this.clicked} ref={this.penbut} className="number" id=" ">P</button></td>
                             <td><button onClick = {this.clicked} className="del" id="Backspace">DEL</button></td>
                             <td></td>
                         </tr>

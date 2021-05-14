@@ -8,6 +8,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.sudokuRef = React.createRef();
+    this.contRef = React.createRef();
   }
   render(){
     return (
@@ -15,8 +16,8 @@ class App extends React.Component {
         <Header />
         <h1>Sudoku</h1>
         <div style={{verticalAlign: "middle"}}>
-          <Sudoku sudokuRef={this.sudokuRef}/>
-          <Controller sudokuRef={this.sudokuRef} />
+          <Sudoku sudokuRef={this.sudokuRef} contRef = {this.contRef}/>
+          <Controller sudokuRef={this.sudokuRef}  contRef={this.contRef} />
         </div>
         
         <Footer />

@@ -2,7 +2,6 @@ import './Sudoku.css'
 import React, { useRef, useEffect } from 'react'
 import Grid from "./grid.js"
 const Sudoku = props =>{
-    console.log("Here");
     var grid;
     const canvasRef = useRef(null)
     
@@ -16,7 +15,6 @@ const Sudoku = props =>{
         updateCanvas();
     }
     var canvasHovered = function(e){
-        console.log("hovered");
         updateCanvas();
     }
     var updateCanvas = function(){
@@ -32,7 +30,8 @@ const Sudoku = props =>{
     useEffect(() => {
         canvas = canvasRef.current
         var context = canvas.getContext('2d')
-        grid = new Grid(0,0,900,900,context);
+        console.log(props)
+        grid = new Grid(0,0,900,900,context, props.contRef);
         props.sudokuRef.current=grid;
         var data = [
             [6,8,0,0,0,2,0,4,9],
@@ -45,6 +44,7 @@ const Sudoku = props =>{
             [0,0,0,0,0,1,0,0,0],
             [0,0,3,0,5,6,9,8,0],]
         grid.import(data);
+        grid.select(0,0);
         grid.draw();
         canvas.addEventListener('click', canvasClicked, false);
         canvas.addEventListener('mouseover', canvasHovered, false);

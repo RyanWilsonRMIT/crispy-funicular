@@ -1,6 +1,6 @@
 import Cell, {strokeColor} from "./cell.js"
 class Grid{
-    constructor(x,y,width, height, ctx){
+    constructor(x,y,width, height, ctx, cont){
         this.x=x;
         this.y=y;
         this.width=width;
@@ -13,6 +13,7 @@ class Grid{
         this.cols = []
         this.boxs = []
         this.pencil=false;
+        this.cont = cont;
         for (var i=0; i<9;i++){
             this.rows[i]=[];
             this.boxs[i]=[];
@@ -23,6 +24,17 @@ class Grid{
                 this.cols[i][j]=false;
             }
         }
+    }
+    togglePencil(){
+        if (this.pencil){
+            this.pencil=false;
+            this.cont.current.penbut.current.classList.remove("pencilGo");
+        }
+        else{
+            this.pencil=true;
+            this.cont.current.penbut.current.classList.add("pencilGo");
+        }
+        
     }
     getCellWidth(){
         return this.width/9
@@ -75,7 +87,6 @@ class Grid{
             }
             this.cells.push(row);
         }
-        console.log("Grid created");
     }
     createGrid(){
         this.cells = [];
@@ -87,7 +98,6 @@ class Grid{
             }
             this.cells.push(row);
         }
-        console.log("Grid created");
     }
     addCell(cell){
         this.cells.append(cell);
@@ -176,18 +186,35 @@ class Grid{
                 }
                 
             }
+            else if (key=="ArrowUp"){
+                if (this.selected.getY()>0){
+                    this.select(this.selected.getX(), this.selected.getY()-1)
+                }
+            }
+            else if (key=="ArrowDown"){
+                if (this.selected.getY()<8){
+                    this.select(this.selected.getX(), this.selected.getY()+1)
+                }
+                
+            }
+            else if (key=="ArrowLeft"){
+                if (this.selected.getX()>0){
+                    this.select(this.selected.getX()-1, this.selected.getY())
+                }
+            }
+            else if (key=="ArrowRight"){
+                if (this.selected.getX()<8){
+                    this.select(this.selected.getX()+1, this.selected.getY())
+                }
+            }
         }
         if (key==" "){
-            console.log("space pushed")
-            if (this.pencil){
-                this.pencil=false;
-            }
-            else{
-                this.pencil=true;
-            }
+            this.togglePencil();
         }
+
         
     }
+
     checkIfValid(cell, key){
         var x = cell.x/cell.width
         var y = cell.y/cell.height

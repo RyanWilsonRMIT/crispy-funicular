@@ -30,3 +30,7 @@
 .controller .del{
     font-size:60px;
 }
+.controller .pencilGo{
+    background-color: red;
+    transition-duration: 0s;
+}

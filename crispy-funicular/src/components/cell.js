@@ -87,6 +87,12 @@ class Cell{
         
         
     }
+    getX(){
+        return this.x/this.width
+    }
+    getY(){
+        return this.y/this.width
+    }
     pencil(key){
         if (this.pencils[key-1]){
             this.pencils[key-1]=false;
