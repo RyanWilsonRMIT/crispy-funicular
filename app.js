@@ -3,7 +3,7 @@ const app = express()
 const port = 80
 
 app.get('/', (req, res) => {
-  res.send(sodoku.html);
+  res.send(sudoku.html);
 })
 
 app.listen(port, () => {
